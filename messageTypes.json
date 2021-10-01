@@ -1,0 +1,33 @@
+"messageTypes": {
+  "Solar": {
+    "id": "0",
+    "title": "SolarWinds",
+    "subUrl": "solar",
+    "messageSchema": {
+      "title": "String",
+      "submittedAt": "Date",
+      "requester": "String",
+      "assignedTo": "String",
+      "attachments": "Boolean"
+    }
+  },
+  "Jump": {
+    "id": "1",
+    "title": "JumpCloud",
+    "subUrl": "jump",
+    "messageSchema": {
+      "title": "String",
+      "time": "Date",
+      "user": "String"
+    }
+  },
+  "Test": {
+    "id": "100",
+    "title": "Test",
+    "subUrl": "test",
+    "messageSchema": {
+      "text": "String",
+      "url": "String"
+    }
+  }
+}
