@@ -32,6 +32,7 @@ Message requirements from SolarWinds
 
 Message comes this route:
 Zapier -> SolarPi
+(Refresh or getDetails) -> Get up-to-date info from Samanage API
 
 message is custom made in Zapier
 
@@ -52,6 +53,10 @@ From Samange is good for details.
 To Update card, will have to have refresh button on main page and parse Samange response to update DB and fields
 
 I could also call Samanage API for new tickets in the Queue process before save to db to get realtime values from Samanage
+Like:
+Assignee: Would be IT Support but it may be better than manual input
+Tag: Will be Howler and possibly Permissions
+/doesn't seem worth it
 
 LongPress can update. Should show loading wheel while gettingg and parsing Response
 
@@ -96,6 +101,7 @@ Headers for Verif.
     attachments: Boolean,
     service: Boolean //Will be true if from Zapier Webhook
     tags: [] //idk how to do arrays in Schema || Array of Strings Initial default: ['Howler']
+        //comments: [{ body: String, date: Date }],
 }
 
 Will add: //looks like these below will have to populate from
