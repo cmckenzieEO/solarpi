@@ -1,0 +1,128 @@
+{
+        "id": 79589131,
+        "number": 185,
+        "name": "Workstation Issue: When going into available with Kitchen Aid the I get an error message saying \"Microphone is not accessible\" even though its all connected.",
+        "description": "Submitted: October 06 2021 11:27:38\nIssue: When going into available with Kitchen Aid the I get an error message saying \"Microphone is not accessible\" even though its all connected.\n\nDetails:\n\n\nImage:\n",
+        "description_no_html": "Submitted: October 06 2021 11:27:38\nIssue: When going into available with Kitchen Aid the I get an error message saying \"Microphone is not accessible\" even though its all connected. Details: Image:",
+        "state": "Assigned",
+        "priority": "Medium",
+        "category": {
+            "id": 1863069,
+            "name": "Workstation",
+            "default_tags": "",
+            "parent_id": null,
+            "default_assignee_id": 7825183
+        },
+        "subcategory": {
+            "id": 1863074,
+            "name": "General",
+            "default_tags": "",
+            "parent_id": 1863069,
+            "default_assignee_id": -1
+        },
+        "assignee": {
+            "group_id": 7759216,
+            "is_user": true,
+            "id": 7195187,
+            "name": "Chris McKenzie",
+            "email": "cmckenzie@energyogre.com",
+            "avatar": {
+                "type": "initials",
+                "color": "#dfcd00",
+                "initials": "CM"
+            },
+            "reports_to": {
+                "group_id": 7757256,
+                "is_user": true,
+                "id": 7193796,
+                "name": "Daniel Carrillo",
+                "email": "dcarrillo@energyogre.com",
+                "avatar": {
+                    "type": "initials",
+                    "color": "#fa7911",
+                    "initials": "DC"
+                }
+            }
+        },
+        "requester": {
+            "id": 7593505,
+            "account_id": 84214,
+            "user_id": 7206278,
+            "email": "bhernandez@energyogre.com",
+            "name": "Bryan Hernandez",
+            "disabled": false,
+            "has_gravatar": false,
+            "customer_satisfaction_survey_time": null,
+            "avatar": {
+                "type": "initials",
+                "color": "#bb5bac",
+                "initials": "BH"
+            }
+        },
+        "created_at": "2021-10-06T11:27:45.000-05:00",
+        "updated_at": "2021-10-06T12:28:33.000-05:00",
+        "due_at": null,
+        "sla_violations": [],
+        "number_of_comments": 2,
+        "user_saw_all_comments": true,
+        "is_service_request": false,
+        "created_by": {
+            "id": 7580831,
+            "account_id": 84214,
+            "user_id": 7195187,
+            "email": "cmckenzie@energyogre.com",
+            "name": "Chris McKenzie",
+            "disabled": false,
+            "has_gravatar": false,
+            "customer_satisfaction_survey_time": "2021-07-29T15:48:39.000-05:00",
+            "avatar": {
+                "type": "initials",
+                "color": "#dfcd00",
+                "initials": "CM"
+            }
+        },
+        "resolved_by": null,
+        "resolution_description": null,
+        "resolution_code": null,
+        "custom": "2021-10-06 16:27:47.672475",
+        "href": "https://api.samanage.com/incidents/79589131-workstation-issue-when-going-into-available-with-kitchen-aid-the-i-get-an-error-message-saying-microphone-is-not-accessible-even-though-its-all-connected.json",
+        "href_account_domain": "https://energyogre.samanage.com/incidents/79589131-workstation-issue-when-going-into-available-with-kitchen-aid-the-i-get-an-error-message-saying-microphone-is-not-accessible-even-though-its-all-connected",
+        "site": {
+            "id": 188937,
+            "name": "Headquarters",
+            "location": "Main Office",
+            "description": "",
+            "time_zone": "Central Time (US & Canada)",
+            "language": "-1",
+            "business_record": null
+        },
+        "department": null,
+        "cc": [],
+        "custom_fields_values": [
+            {
+                "id": 150108019,
+                "custom_field_id": 1974605,
+                "name": "Manager",
+                "value": "jdsouza@energyogre.com",
+                "attachment": null,
+                "options": "Requester's Manager email",
+                "type": 1,
+                "type_name": "Text",
+                "entity": null,
+                "user": null
+            }
+        ],
+        "origin": "api",
+        "incidents": [],
+        "changes": [],
+        "tasks": [],
+        "time_tracks": [],
+        "solutions": [],
+        "assets": [],
+        "mobiles": [],
+        "other_assets": [],
+        "configuration_items": [],
+        "discovery_hardwares": [],
+        "purchase_orders": [],
+        "problem": []
+    }
