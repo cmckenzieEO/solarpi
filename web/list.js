@@ -1,5 +1,8 @@
 const express = require('express');
 const repo = require('../lib/repo');
+const router = express.Router();
+
+const countRouter = require('./count');
 
 const MessageTypes = require('../lib/messageTypes');
 
@@ -34,7 +37,7 @@ const listSubRoute = (req, res) => {
   const subs = MessageTypes.MessageTypes;
 
   for (const type in subs) {
-      console.log(subs[type]);
+      //console.log(subs[type]);
       if (req.params.sub == subs[type].subUrl) {
           console.log("got it");
           repo
@@ -44,6 +47,7 @@ const listSubRoute = (req, res) => {
                 res.header("Access-Control-Allow-Origin", "*");
                 res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
                 res.end(JSON.stringify(messages));
+                //res.end(JSON.stringify(count));
             })
             .catch(e => {
                 console.error(e);
@@ -61,9 +65,12 @@ const listSubRoute = (req, res) => {
   //repo.listSub(sub)
 };
 
-const router = express.Router();
+
+
+
 //all messages
 router.get('/', listRoute);
+router.use('/count', countRouter);
 router.get('/types', listTypes);
 router.get('/:sub', listSubRoute);
 

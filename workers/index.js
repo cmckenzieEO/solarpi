@@ -3,21 +3,25 @@ const repo = require('../lib/repo');
 
 const handleIncoming = message =>
   repo
-    .createTest(message)
+    .createSub('test',message)
     //.createSolar(message)
     .then(record => {
       console.log('Saved ' + JSON.stringify(record));
       return queue.send('socket', record);
+    }).catch(error => {
+        console.log(error)
     });
 
 const handleSolar = message =>
   repo
-    .createSolar(message)
+    .createSub('solar',message)
     //.createSolar(message)
     .then(record => {
       console.log('Saved ' + JSON.stringify(record));
       return queue.send('socket', record);
-    });
+  }).catch(error => {
+      console.log(error);
+  });
 
 queue
   .receive('incoming', handleIncoming)
