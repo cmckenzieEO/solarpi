@@ -3,6 +3,7 @@ When to update cards (see below)
 Details page when pressed
 Different View Styles
 Remove unneeded extra views (MessageCards)
+Settings
 
 
 ////////////// APIs
@@ -13,6 +14,21 @@ Jumpcloud user lockout
 
 ///////////// Modularity
 Abstract schemas and DB saves as much as possible. If hitting a road block for hard-coding, abstracting may be a pointless adventure. (at least the schema loading is abstracted)
+Was able to save fields according to Schema dynamically into DB.
+My only current problem is specific changes. EX: Solar: assignedTo, tags, service.
+This will need to be defaulted as it won't get the value from Smamange.
+However, I can set it manually in Zapier. Since Zapier will technically mimic a POST (it is a POST to my API) the values can be set there without breaking expected functionality from abstracted Webhook sources
+Currently I have hard coded Queue routes: Solar and Test. webhooks/index.js
+
+Save Messagetypes in DB. this will allow methods to modify it as well as pulling raw JSON
+
+RabbitMQ also dynamically creates connection channels
+
+Dynamic:
+MessageSchemas
+RabbitMQ
+CatWindows
+Card Data displaying (working on it)
 
 
 ///////////// Futures
