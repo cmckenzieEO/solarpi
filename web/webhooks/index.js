@@ -5,6 +5,8 @@ const githubRoute = require('./github');
 const solarRoute = require('./solarwinds');
 const jumpRoute = require('./jumpcloud');
 
+const isPojo = require("is-pojo");
+
 const queue = require('../../lib/queue');
 const MessageTypes = require('../../lib/messageTypes');
 
@@ -26,12 +28,26 @@ const subRoute = (req, res) => {
         }
     }
     console.log(typeZ)
-    for (field in typeZ.messageSchema) {
-        //console.log("Fields: ",field,req.body[field])
-        if (req.body[field]) {
+    // for (field in typeZ.messageSchema) {
+    //     console.log("Schema: Req: Fields: ",field,req.body[field])
+    //     if (req.body[field]) {
+    //         message[field] = req.body[field]
+    //     } else {
+    //         message.misc[field] = req.body[field]
+    //     }
+    // }
+    message.misc = {}
+    for (field in req.body) {
+        console.log("Req: Schema: Fields: ",field,typeZ.messageSchema[field])
+        if (typeZ.messageSchema[field]) {
             message[field] = req.body[field]
+        } else {
+            message.misc[field] = req.body[field]
         }
     }
+
+
+
     const messagez = req.body;
     queue
         .send(subUrl, message)

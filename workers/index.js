@@ -1,5 +1,6 @@
 const queue = require('../lib/queue');
 const repo = require('../lib/repo');
+const isPojo = require("is-pojo");
 
 const MessageTypes = require('../lib/messageTypes');
 const messageTypes = MessageTypes.MessageTypes;
@@ -52,6 +53,8 @@ for (let type in messageTypes) {
       })
       .catch(console.error);
 }
+let bar = {foo: "bar"}
+if (isPojo(bar)) console.log("pojo")
 
 // queue
 //   .receive('test', handleIncoming)
