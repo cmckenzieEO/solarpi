@@ -27,5 +27,17 @@ const configureWebSockets = httpServer => {
     })
     .catch(console.error);
 
+    queue
+    .receive('socketChange', message => {
+      if (!connection) {
+        console.log('no WebSocket connection');
+        return;
+      }
+      let changeMessage = "change detected"
+      //connection.sendUTF(JSON.stringify(message));
+      connection.sendUTF(JSON.stringify(changeMessage));
+    })
+    .catch(console.error);
+
 };
 module.exports = configureWebSockets;
