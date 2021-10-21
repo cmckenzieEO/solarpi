@@ -5,6 +5,11 @@ const isPojo = require("is-pojo");
 const MessageTypes = require('../lib/messageTypes');
 const messageTypes = MessageTypes.MessageTypes;
 
+const Schemas = require('../lib/declareSchemas');
+// const modelList = Schemas.models;
+// const schemaList = Schemas.schemas;
+const watchList = Schemas.watches;
+
 // const handleIncoming = message =>
 //   repo
 //     .createSub('test',message)
@@ -53,8 +58,13 @@ for (let type in messageTypes) {
       })
       .catch(console.error);
 }
-let bar = {foo: "bar"}
-if (isPojo(bar)) console.log("pojo")
+
+for (watch in watchList) {
+    watchList[watch].on('change', change => {
+        console.log(change)
+        return queue.send('socketChange', "changed");
+    });
+}
 
 // queue
 //   .receive('test', handleIncoming)

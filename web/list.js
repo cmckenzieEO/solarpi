@@ -31,38 +31,31 @@ const listRoute = (req, res) => {
     });
 };
 
-
+const listHeaders = {
+    "Content-Type" : "application/json",
+    "Access-Control-Allow-Origin" : "*",
+    "Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept"
+}
 
 const listSubRoute = (req, res) => {
   const subs = MessageTypes.MessageTypes;
-
   for (const type in subs) {
-      //console.log(subs[type]);
       if (req.params.sub == subs[type].subUrl) {
-          console.log("got it");
           repo
             .listSub(req.params.sub)
             .then(messages => {
-                res.setHeader('content-type', 'application/json');
-                res.header("Access-Control-Allow-Origin", "*");
-                res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                res.set(listHeaders);
                 res.end(JSON.stringify(messages));
-                //res.end(JSON.stringify(count));
             })
             .catch(e => {
                 console.error(e);
                 res.status(500);
-                res.setHeader('content-type', 'application/json');
+                //res.setHeader('ontent-type', 'application/json');
+                res.setType('application/json');
                 res.end(JSON.stringify({ error: e.message }));
             });
     }
-
-
-    //if (request.params.sub) {
-    //need to ask the server for Messagetypes. this way the client receives routes and messages dynamically without changing hardcode
-  }
-  ////////////////////////////////////////////////////////////
-  //repo.listSub(sub)
+}
 };
 
 
