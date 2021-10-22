@@ -32,11 +32,11 @@ const countSubRoute = (req, res) => {
           console.log("got it");
           repo
             .listSubCount(req.params.sub)
-            .then(messages => {
+            .then(count => {
                 res.setHeader('content-type', 'application/json');
                 res.header("Access-Control-Allow-Origin", "*");
                 res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-                let count = Object.keys(messages).length
+                //let count = Object.keys(messages).length
                 res.end(JSON.stringify(count));
                 //res.end(JSON.stringify(messages));
                 //res.end(JSON.stringify(count));

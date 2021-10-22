@@ -68,6 +68,9 @@ Refresh Button:
 Updates are done upon change in db. New Message or Change in fields.
 I have pieced this together and it is VERY sloppy. Please clean and code properly
 
+//////////////// LIMIT CARDS
+
+For now i will hard code limits in. Will need a config file forr many options. This will have to be done over API.
 
 ////// Considerations
 
