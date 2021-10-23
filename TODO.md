@@ -32,7 +32,7 @@ CatWindows
 Card Data displaying (working on it) - Some things are still not abstracted.
     Title, and statusbar should(do) populate according to Schema.
 
-
+Should save a DB table for config. Populate according to schemas and API to UPDATE/GET config
 
 
 ///////////// Futures
