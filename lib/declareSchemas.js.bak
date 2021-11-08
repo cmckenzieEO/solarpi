@@ -148,9 +148,11 @@ const initTypes = async () => {
 
 async function initTypeModels(type) {
     let sch = new mongoose.Schema(MessageTypes[type].messageSchema);
+    //let sch = new mongoose.Schema(MessageTypes[type]);
     let mod = mongoose.model(MessageTypes[type].subUrl, sch)
     watches.push(mod.watch())
     //messageModels.push(mod);
+    messageModels.push(mod);
 }
 
 

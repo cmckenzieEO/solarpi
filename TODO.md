@@ -34,6 +34,14 @@ Card Data displaying (working on it) - Some things are still not abstracted.
 
 Should save a DB table for config. Populate according to schemas and API to UPDATE/GET config
 
+mongoose.Models persist globally. creating them from thee db on load and reloading them upon config change/reload would make more sense than trying to load them from the db every message received.
+Connections also accept models and persist only for the connection. meaning, a disconnect and reconnect will reset current models. If other options may need resetting, this may be the preffered choice. Otherwise, not clear on pros and cons
+Options are:
+Delete and remake mongoose.models
+Disconnect and reconnect connection to recreate model changes
+
+
+
 
 ///////////// Futures
 SolarWinds comments/state change/ etc.
