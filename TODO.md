@@ -1,9 +1,9 @@
 Flesh out DB entries with schemas
-When to update cards (see below)
+When to update cards (see below) --DONE
 Details page when pressed
 Different View Styles
 Remove unneeded extra views (MessageCards)
-Settings
+Settings/Config
 AUTH
 
 
@@ -39,6 +39,33 @@ Connections also accept models and persist only for the connection. meaning, a d
 Options are:
 Delete and remake mongoose.models
 Disconnect and reconnect connection to recreate model changes
+
+remember: Config and messagetypes are different things.
+
+Current:
+There is a class called 'schemaLoader' this handles the schema,models, and messageType actions.
+this class callse event on('connected') when mongoose connection is made. This event allows control over how the init messagetypes are loaded via .intiTypeModels() (config should be made this way too)
+Methods are available to pull messagetypes from a file(saves to DB => loads from DB), from the DB (loads from DB)
+Loading from file or DB removes old models except for Config model (needs vars in code to be renamed) 'MessageTypes'
+Method available to overwrite current messageTypes. This is after init and changes need to be made.
+LoadFromFile is capable of providing a custom file or using default /lib/messagetypes.js. There needs to be file verification
+API is avaliable for polling messageTypes and adding a new one. After such call, (i think) it auto re-loads. (Saves to DB => loads from DB) (this will also remove old models)
+API takes a query param for ?multiple true for an obj or array containing multiple. false or not-provided for a single entry.
+
+Tested:
+Creating new Type from API, shows new category on reload, counts messages. Able to send a new message via POST to new messageType, auto update on new message.
+This was only possible after moving all methods to pull from DB. Including creating queue channels
+
+possible schemaLoader methods:
+LoadFromDB: Deletes old models, pulls from DB, creates new models.
+PullFromDB: Gathers types from DB (no other action)
+LoadFromFile: Reads custom file, saves to DB, removes old models, loads from DB
+initTypeModels: initial load.
+    (): loads from DB
+    (file,default): custom file, or use default file
+        (null,true): use default file (messageTypes.js)
+
+
 
 
 
@@ -107,3 +134,7 @@ Proper error messages
 Calls are mostly migrated to DB calls. Should consider saving to local instance and running update checks periodically.
 Calls need error checking and proper async.
 Problem with init loading. Runs twice. (Check 'connected' event, it runs twice)
+
+I have schemas in DB with limited validation. Detailed validation with methods, etc. should be built.
+
+Cards category updates automatically on every new (sub)message (this is done with model.watch() on a replica set(also, is probably why the 'connected' fires twice)). Also there is a refresh button per category. will make a global refresh button
