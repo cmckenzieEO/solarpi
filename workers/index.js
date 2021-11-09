@@ -4,6 +4,7 @@ const isPojo = require("is-pojo");
 
 const MessageTypes = require('../lib/messageTypes');
 const messageTypes = MessageTypes.MessageTypes;
+const messageTypesDB = require('../lib/schema/schemaLoader')
 
 const Schemas = require('../lib/declareSchemas');
 // const modelList = Schemas.models;
@@ -43,21 +44,40 @@ const handleSub = message =>
       console.log(error);
   });
 
-for (let type in messageTypes) {
-    queue
-      .receive(messageTypes[type].subUrl, message => {
-          repo
-            .createSub(messageTypes[type].subUrl,message)
-            //.createSolar(message)
-            .then(record => {
-              console.log('Saved ' + JSON.stringify(record));
-              return queue.send('socket', record);
-            }).catch(error => {
-                console.log(error)
-            });
-      })
-      .catch(console.error);
-}
+(async () => {
+    console.log("hi form anon async")
+    let messageTypes = await messageTypesDB.pullFromDB()
+    for (let type in messageTypes) {
+        queue
+          .receive(messageTypes[type].subUrl, message => {
+              repo
+                .createSub(messageTypes[type].subUrl,message)
+                //.createSolar(message)
+                .then(record => {
+                  console.log('Saved ' + JSON.stringify(record));
+                  return queue.send('socket', record);
+                }).catch(error => {
+                    console.log(error)
+                });
+          })
+          .catch(console.error);
+    }
+})();
+// for (let type in messageTypes) {
+//     queue
+//       .receive(messageTypes[type].subUrl, message => {
+//           repo
+//             .createSub(messageTypes[type].subUrl,message)
+//             //.createSolar(message)
+//             .then(record => {
+//               console.log('Saved ' + JSON.stringify(record));
+//               return queue.send('socket', record);
+//             }).catch(error => {
+//                 console.log(error)
+//             });
+//       })
+//       .catch(console.error);
+// }
 
 for (watch in watchList) {
     watchList[watch].on('change', change => {

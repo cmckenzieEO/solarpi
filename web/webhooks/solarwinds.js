@@ -2,12 +2,11 @@ const queue = require('../../lib/queue');
 const MessageTypes = require('../../lib/messageTypes');
 
 const solarRoute = (req, res) => {
-    console.log("json" + JSON.stringify(req.body));
+    //console.log("json" + JSON.stringify(req.body));
 
     let message = {}
 
-    const messageTypes = MessageTypes.MessageTypes;
-    //console.log(messageTypes.Solar.messageSchema)
+    const messageTypes = MessageTypes.MessageTypes; //change from messageTypes. See note about updating config
     for (field in messageTypes.Solar.messageSchema) {
         console.log("Fields: ",field,req.body[field])
         if (req.body[field]) {
@@ -15,18 +14,7 @@ const solarRoute = (req, res) => {
         }
     }
 
-    // const {
-    //     title: title
-    // } = req.body;
-    //
-    // const message = {
-    //     title: `SolarWinds: ${title}`,
-    //     url: 'prUrl',
-    // };
-
     const messagez = req.body;
-    //console.log(messagez);
-    //console.log(messageZ);
     queue
         .send('solar', message)
             .then(() => {

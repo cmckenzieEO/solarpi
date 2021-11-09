@@ -2,7 +2,7 @@ const http = require('http');
 const express = require('express');
 const webhookRouter = require('./webhooks');
 const listRouter = require('./list');
-const configRouter = require('./config/');
+const configRouter = require('./config');
 const configureWebSockets = require('./socket');
 const cors = require("cors")
 
@@ -16,7 +16,7 @@ const MessageTypes = require('../lib/messageTypes');
 
 app.use('/webhooks', webhookRouter);
 app.use('/list', listRouter);
-app.use('config', configRouter);
+app.use('/config', configRouter);
 
 
 app.use(cors());

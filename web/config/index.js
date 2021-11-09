@@ -5,6 +5,10 @@ const cors = require("cors");
 
 const router = express.Router();
 
+const typesRoute = require("./types")
+
+const Schemas = require("../../lib/schema/schemaloader")
+
 const loadConfig = (req, res) => {
       // repo
       //   .listTest()
@@ -24,6 +28,10 @@ const loadConfig = (req, res) => {
 }
 
 
+
 router.get('/', loadConfig);
+//router.get('/types', listTypes);
+router.use('/types', typesRoute);
+//router.post('/types', express.json(),typesRoute)
 
 module.exports = router;

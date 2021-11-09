@@ -9,25 +9,29 @@ const isPojo = require("is-pojo");
 
 const queue = require('../../lib/queue');
 const MessageTypes = require('../../lib/messageTypes');
+const Schemas = require('../../lib/schema/schemaLoader');
 
 const router = express.Router();
 
-const subRoute = (req, res) => {
+const subRoute = async (req, res) => {
     let subUrl = req.params.sub;
     //console.log(subUrl)
     //console.log("json" + JSON.stringify(req.body));
     let message = {}
-    const messageTypes = MessageTypes.MessageTypes;
+    //const messageTypes = MessageTypes.MessageTypes;
+    const messageTypes = await Schemas.pullFromDB()
+    //need to pull from DB
+    //question is...pull from db? or from a config file holding db info?
 
     let typeZ;
     for (type in messageTypes) {
         //console.log(messageTypes[type].subUrl)
         if (messageTypes[type].subUrl == subUrl) {
-            //console.log("Found:type.sub:sub",messageTypes[type].subUrl,subUrl);
+            console.log("Found:type.sub:sub",messageTypes[type].subUrl,subUrl);
             typeZ = messageTypes[type];
         }
     }
-    console.log(typeZ)
+    //console.log(typeZ)
     // for (field in typeZ.messageSchema) {
     //     console.log("Schema: Req: Fields: ",field,req.body[field])
     //     if (req.body[field]) {

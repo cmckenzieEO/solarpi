@@ -94,3 +94,12 @@ NOTE: Combinations of these are allowed
 
 Thinking...
 1, 4, 5, 6
+
+
+
+When getting config, should check for updates in DB.
+
+Init load, save to local cache. check for updates at every relevant point, compared to a settable difference time.
+if newer, update config. Saves on DB calls or API calls
+
+Proper error messages

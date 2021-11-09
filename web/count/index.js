@@ -5,6 +5,7 @@ const router = express.Router();
 //router.get('/', express.json(), githubRoute);
 
 const MessageTypes = require('../../lib/messageTypes');
+const Schemas = require("../../lib/schema/schemaLoader")
 
 const countRoute = (req,res) => {
     repo.listCount()
@@ -25,8 +26,9 @@ const countRoute = (req,res) => {
       });
 };
 
-const countSubRoute = (req, res) => {
-  const subs = MessageTypes.MessageTypes;
+const countSubRoute = async (req, res) => {
+  //const subs = MessageTypes.MessageTypes;
+  const subs = await Schemas.pullFromDB()
   for (const type in subs) {
       if (req.params.sub == subs[type].subUrl) {
           console.log("got it");
