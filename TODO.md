@@ -103,3 +103,7 @@ Init load, save to local cache. check for updates at every relevant point, compa
 if newer, update config. Saves on DB calls or API calls
 
 Proper error messages
+
+Calls are mostly migrated to DB calls. Should consider saving to local instance and running update checks periodically.
+Calls need error checking and proper async.
+Problem with init loading. Runs twice. (Check 'connected' event, it runs twice)
