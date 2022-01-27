@@ -1,0 +1,182 @@
+//messageTypes - needs ID to be able to grab ticket by id
+//How will i grab ID? or some other Unique identifier? Maybe Zapier can process response headers?
+
+/**
+should there be a difference between messageScheam and detailSchema?
+Remember that the purpose is to display brief ticket info and click for details.
+The initial receiving/checking of messages could be limited for storage capacity. Then details are loaded on the fly for accuraccy.
+Is there a need to save all fields to DB?
+
+Although they should both share the same displayVars. This may not be possible/efficientt being that for example:
+Messages come from Zapier about SW but only contain limited fields. These fields are named loosely for ease of integration.
+However, the API fields are different. Either:
+Initial short message includes desired fields mirroring API field name with 1 displayVars obj
+-- or --
+Seperate declarations for each
+
+With a single displayVars - it will contain more info than the init message requires.
+But may contain multiple field refs if init message does not match API field precisely. (not in quantity but in field name)
+
+Think I will go with seperate declarations. If no 'detailSchema' is specified then 'messsageScjema' is used.
+If no displayVars for detailsSchema is used then will use the one for message schema.
+Maybe have a global and then children for each if needed?
+
+Looks like i will have to iterate to extract each field
+**/
+
+{
+    "id": 84236615,
+    "number": 323,
+    "name": "Permission Request",
+    "description": "Submitted: January 04 2022 09:49:44\n\nTarget User(s):\nVictor Herrera, Stephanie Gonzalez, Pria Ram\n\nChanges:\nPlease provide them access to AWS as the EO-Lead security profile.\n\nAdditional details:\nThey will need access to be able to monitor the call board",
+    "description_no_html": "Submitted: January 04 2022 09:49:44 Target User(s):\nVictor Herrera, Stephanie Gonzalez, Pria Ram Changes:\nPlease provide them access to AWS as the EO-Lead security profile. Additional details:\nThey will need access to be able to monitor the call board",
+    "state": "Resolved",
+    "priority": "Medium",
+    "category": {
+        "id": 1835105,
+        "name": "Account Management",
+        "default_tags": "account management",
+        "parent_id": null,
+        "default_assignee_id": null
+    },
+    "subcategory": {
+        "id": 1869135,
+        "name": "Permissions",
+        "default_tags": "permission",
+        "parent_id": 1835105,
+        "default_assignee_id": 7825183
+    },
+    "assignee": {
+        "group_id": 7757256,
+        "is_user": true,
+        "id": 7193796,
+        "name": "Daniel Carrillo",
+        "email": "dcarrillo@energyogre.com",
+        "avatar": {
+            "type": "initials",
+            "initials": "DC",
+            "color": "#fa7911"
+        },
+        "reports_to": null
+    },
+    "requester": {
+        "id": 7593533,
+        "account_id": 84214,
+        "user_id": 7206306,
+        "email": "jdsouza@energyogre.com",
+        "name": "Judel D'Souza",
+        "disabled": false,
+        "has_gravatar": false,
+        "customer_satisfaction_survey_time": null,
+        "avatar": {
+            "type": "initials",
+            "initials": "JD",
+            "color": "#0bc46f"
+        }
+    },
+    "created_at": "2022-01-04T09:49:58.000-06:00",
+    "updated_at": "2022-01-04T10:00:16.000-06:00",
+    "due_at": null,
+    "sla_violations": [],
+    "number_of_comments": 2,
+    "user_saw_all_comments": false,
+    "is_service_request": false,
+    "created_by": {
+        "id": 7580831,
+        "account_id": 84214,
+        "user_id": 7195187,
+        "email": "cmckenzie@energyogre.com",
+        "name": "Chris McKenzie",
+        "disabled": false,
+        "has_gravatar": false,
+        "customer_satisfaction_survey_time": "2021-07-29T15:48:39.000-05:00",
+        "avatar": {
+            "type": "initials",
+            "initials": "CM",
+            "color": "#dfcd00"
+        }
+    },
+    "resolved_by": {
+        "id": 7193796,
+        "name": "Daniel Carrillo",
+        "disabled": false,
+        "title": "IT Support Manager",
+        "email": "dcarrillo@energyogre.com",
+        "created_at": "2021-07-07T21:29:37.000-05:00",
+        "updated_at": "2022-01-04T09:37:21.000-06:00",
+        "last_login": "2022-01-04T09:37:21.000-06:00",
+        "phone": "",
+        "mobile_phone": "",
+        "role": {
+            "id": 652675,
+            "name": "Administrator",
+            "description": "This is the all powerful administrator user!",
+            "portal": false,
+            "show_my_tasks": false
+        },
+        "salt": "7835e42bc53a582535c09d6dfb7e75971ce99c20",
+        "group_ids": [
+            7757256,
+            7825183
+        ],
+        "available_for_assignment": false,
+        "can_be_available_for_assignment": false,
+        "custom_fields_values": [],
+        "site": null,
+        "department": {
+            "id": 282404,
+            "name": "IT Support",
+            "description": "",
+            "default_assignee_id": 7757256
+        },
+        "avatar": {
+            "type": "initials",
+            "initials": "DC",
+            "color": "#fa7911"
+        },
+        "reports_to": null
+    },
+    "resolution_description": null,
+    "resolution_code": "Solved_permanently",
+    "custom": "2022-01-04 15:50:01.097175",
+    "href": "https://api.samanage.com/incidents/84236615-permission-request.json",
+    "href_account_domain": "https://energyogre.samanage.com/incidents/84236615-permission-request",
+    "site": {
+        "id": 188937,
+        "name": "Headquarters",
+        "location": "Main Office",
+        "description": "",
+        "time_zone": "Central Time (US & Canada)",
+        "language": "-1",
+        "business_record": null
+    },
+    "department": null,
+    "cc": [],
+    "custom_fields_values": [
+        {
+            "id": 161127989,
+            "custom_field_id": 1931046,
+            "name": "Target User(s):",
+            "value": "Victor Herrera, Stephanie Gonzalez, Pria Ram",
+            "attachment": null,
+            "options": "None mentioned",
+            "type": 1,
+            "type_name": "Text",
+            "entity": null,
+            "user": null
+        }
+    ],
+    "origin": "api",
+    "incidents": [],
+    "changes": [],
+    "tasks": [],
+    "time_tracks": [],
+    "solutions": [],
+    "assets": [],
+    "mobiles": [],
+    "other_assets": [],
+    "configuration_items": [],
+    "discovery_hardwares": [],
+    "purchase_orders": [],
+    "problem": []
+}

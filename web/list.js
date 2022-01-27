@@ -47,10 +47,15 @@ const listSubRoute = async (req, res) => {
     const subs = await Schemas.pullFromDB()
     //console.log("hi",subs)
   //const subs = MessageTypes.MessageTypes;
+  let mod = new Map()
+  if (req.query.limit) {
+      mod.set('limit', req.query.limit)
+      console.log(mod.get('limit'))
+  }
   for (const type in subs) {
       if (req.params.sub == subs[type].subUrl) {
           repo
-            .listSub(req.params.sub)
+            .listSub(req.params.sub,mod)
             .then(messages => {
                 res.set(listHeaders);
                 res.end(JSON.stringify(messages));
@@ -59,7 +64,7 @@ const listSubRoute = async (req, res) => {
                 console.error(e);
                 res.status(500);
                 //res.setHeader('ontent-type', 'application/json');
-                res.setType('application/json');
+                //res.setType('application/json');
                 res.end(JSON.stringify({ error: e.message }));
             });
     }

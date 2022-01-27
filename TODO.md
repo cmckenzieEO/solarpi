@@ -4,7 +4,7 @@ Details page when pressed
 Different View Styles
 Remove unneeded extra views (MessageCards)
 Settings/Config
-AUTH
+User/AUTH
 
 
 ////////////// APIs
@@ -65,6 +65,7 @@ initTypeModels: initial load.
     (file,default): custom file, or use default file
         (null,true): use default file (messageTypes.js)
 
+While it functions, it needs to be cleaned up. it is badly typed and misorganized
 
 
 
