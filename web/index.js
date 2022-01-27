@@ -82,7 +82,7 @@ app.get('/api', async function(req, res) {
   let config = {
       url: `https://api.samanage.com/incidents/${id}.json`,
       headers : {
-          'X-Samanage-Authorization' : 'Bearer Y21ja2VuemllQGVuZXJneW9ncmUuY29t:eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX2lkIjo3MTk1MTg3LCJnZW5lcmF0ZWRfYXQiOiIyMDIxLTA4LTAzIDEyOjMzOjUwIn0.oELgvwACEGaynaQ3AkJw07uOTI_3AUlFYzsXIfrPlRiEFo3QyhwPHUwhz_nHZ6_qzZpmJDGx2plyxVazGlAojg',
+          'X-Samanage-Authorization' : `Bearer ${process.env.SW_TOKEN}`,
           'Accept' : 'application/json'
       }
   }
