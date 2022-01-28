@@ -1,7 +1,10 @@
+require('dotenv').config()
+
+
 const http = require('http');
 const express = require('express');
 const session = require('express-session');
-const cookieParser = require('cookie-parser');
+const app = express();
 
 const axios = require('axios');
 
@@ -17,19 +20,15 @@ const MessageTypes = require('../lib/messageTypes');
 
 process.env.DEBUG = 'express-session'
 
- const app = express();
-
-//console.log(MessageTypes)
-//console.log(MessageTypes.MessageTypes)
 store  = new session.MemoryStore;
-//app.use(cookieParser())
+
 app.use(session({
     secret:'Keep it secret',
     name:'uniqueSessionID',
     resave: false,
     saveUninitialized: false,
     path: '/',
-    unset: 'destroy',
+    //unset: 'destroy',
     cookie: {secure: false}
 }))
 
@@ -43,42 +42,11 @@ app.use(cors({
   origin: 'http://localhost:19006',
   credentials: true
 }))
-//app.options('*', cors())
 
-// const checkSession = (req, res, next) => {
-//     //let message;
-//     console.log('bobr',req.session)
-//     if(req.session.loggedIn) {
-//         //if (req.path == '/auth/authenticate') return next()
-//         res.set(corsHeader)
-//         let msg = "User logged in according to session."
-//         console.log(msg)
-//         // message = {
-//         //     logged: true,
-//         //     email: req.session.email
-//         // }
-//         //res.send(JSON.stringify(msg))
-//         next()
-//          //res.end()
-//     } else {
-//         //res.set(corsHeader)
-//         //res.status = "401"
-//         console.log("User NOT logged in according to session.")
-//         //res.sendStatus(401)
-//         //res.setStatus(401)
-//         res.status(401)
-//         next()
-//
-//     }
-// }
-
-//app.use('/',(req,res) => checkSession(req,res))
-//app.all('*',checkSession)
 
 app.get('/api', async function(req, res) {
   //const axios.get('https://api.samanage.com/incidents/84236615.json')
   let id = req.query.id
-  //console.log(id)
   let config = {
       url: `https://api.samanage.com/incidents/${id}.json`,
       headers : {

@@ -11,14 +11,6 @@ const router = express.Router();
 const MessageTypes = require('../../lib/messageTypes');
 const Schemas = require("../../lib/schema/schemaLoader")
 
-//router.use(session)
-// router.use(session({
-//     resave: "false",
-//     secret:'Keep it secret',
-//     name:'uniqueSessionID',
-//     saveUninitialized:true,
-//     cookie: {maxAge: 10000,secure: false}
-// }))
 router.use(cors({
   origin: 'http://localhost:19006',
   credentials: true
@@ -35,6 +27,7 @@ const checkSession = (req, res) => {
     //let message;
     //if (req.path == '/*')
     console.log('checkSession',req.session)
+    console.log('SessionID' + session.sessionID)
     if(req.session.loggedIn) {
         res.set(corsHeader)
         let msg = "User logged in according to session."
@@ -48,6 +41,7 @@ const checkSession = (req, res) => {
         res.set(corsHeader)
         res.status = "401"
         let msg = "User NOT logged in according to session."
+        console.log(msg)
         res.sendStatus(401)
     }
 }
@@ -84,26 +78,19 @@ const registerUser2 = (req,res,next) => {
     }
 }
 
-const registerSession = ({session},res) => {
-        session.loggedIn = true
-        session.email = res.locals.email
-        console.log('bobber',session)
-        //res.redirect('/dashboard')
-        //res.session.loggedIn = true
+const registerSession = (req,res) => {
+        req.session.loggedIn = true
+        req.session.email = res.locals.email
         let log = {
             loggedIn: true,
             email: session.email
         }
         res.send(log)
-        //console.log(res)
     }
-
-
-
 
 const loginUser = (req,res) => {
     let {email,pass} = req.body
-    console.log(email,pass)
+    //console.log(email,pass)
     repo.loginUser()
         .then(ab => {
             //encrypt
@@ -120,76 +107,25 @@ const loginUser = (req,res) => {
 }
 
 const logoutUser = (req,res) => {
-    console.log(req)
-    console.log('logout sess before: ',req.session)
-    req.session.loggedIn = false
-    req.session.email = null
-    req.session = null
-    //req.session.destroy()
-
-    console.log('logout sess after: ',req.session)
-    res.clearCookie('connect.sid', { path: '/' })
-    res.clearCookie('uniqueSessionID', { path: '/' })
-    //req.logout()
-    res.redirect('./authenticate')
-    //res.end()
-    //res.send('Thank you! Visit again')
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        res.status(400).send('Unable to log out')
+      } else {
+        res.send('Logout successful')
+      }
+    });
+  } else {
+    res.end()
+  }
 }
 
-// const countRoute = (req,res) => {
-//     repo.listCount()
-//          .then(messages => {
-//               res.set({corsheaders})
-//               // res.setHeader('content-type', 'application/json');
-//               // res.header("Access-Control-Allow-Origin", "*");
-//               // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//               let count = Object.keys(messages).length
-//               console.log("count: " + count)
-//               res.end(JSON.stringify(count));
-//               //res.end(JSON.stringify(messages));
-//       })
-//       .catch(e => {
-//         console.error(e);
-//         res.status(500);
-//         res.setHeader('content-type', 'application/json');
-//         res.end(JSON.stringify({ error: e.message }));
-//       });
-// };
-//
-// const countSubRoute = async (req, res) => {
-//   //const subs = MessageTypes.MessageTypes;
-//   const subs = await Schemas.pullFromDB()
-//   for (const type in subs) {
-//       if (req.params.sub == subs[type].subUrl) {
-//           console.log("got it");
-//           repo
-//             .listSubCount(req.params.sub)
-//             .then(count => {
-//                 res.setHeader('content-type', 'application/json');
-//                 res.header("Access-Control-Allow-Origin", "*");
-//                 res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//                 //let count = Object.keys(messages).length
-//                 res.end(JSON.stringify(count));
-//                 //res.end(JSON.stringify(messages));
-//                 //res.end(JSON.stringify(count));
-//             })
-//             .catch(e => {
-//                 console.error(e);
-//                 res.status(500);
-//                 res.setHeader('content-type', 'application/json');
-//                 res.end(JSON.stringify({ error: e.message }));
-//             });
-//     }
-//   }
-// };
-//router.use(cors())
-//router.get('/', countRoute);
 router.get('/authenticate', checkSession);
 //router.post('/register',bodyParser.urlencoded(),registerUser2,registerSession);
 router.post('/register',bodyParser.json(),registerUser2,registerSession);
 //router.post('/register', registerUser);
 router.post('/login', loginUser);
-router.post('/logout', logoutUser);
+router.delete('/logout', logoutUser);
 //router.get('/:sub', countSubRoute);
 
 module.exports = router;
